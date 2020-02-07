@@ -62,12 +62,26 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%; /* put the clock hands center into the clock center for rotattion*/
+      transform: rotate(90deg); /* put from left to right into down to up */
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1); /* hands ticking */
     }
 
   </style>
 
   <script>
+    const secondHand = document.querySelector('.second-hand'); // grab second-hand class
 
+    function setDate() {
+      const now = new Date(); // get the current date and time ...
+      const seconds = now.getSeconds(); // get the seconds
+      const secondsDegrees = ((seconds / 60) * 360) + 90; // offset default 90deg, put the seconds in the right ratio
+      secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+    }
+    setInterval(setDate, 1000);
+
+    setDate()
 
   </script>
 </body>
