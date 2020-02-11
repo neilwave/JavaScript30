@@ -11,8 +11,6 @@ function setDate() {
     secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
     secondHand.style.backgroundColor = 'lightskyblue'; // just some different color
 
-    console.log(secondsDegrees);
-
     const mins = now.getMinutes();
     const minutesDegrees = ((mins / 60) *360 ) + 90;
     minsHand.style.transform = `rotate(${minutesDegrees}deg)`;
@@ -21,19 +19,22 @@ function setDate() {
     const hoursDegrees = ((hours / 12) *360 ) + 90;
     hrsHand.style.transform = `rotate(${hoursDegrees}deg)`;
 
-    // transition bug fix
+    // transition glitch bugfix
+    // for seconds
     if(secondsDegrees == '90') {
         secondHand.style.transitionProperty = 'none';
-    }
+    } else (secondHand.style.transitionProperty = 'all');
+    // for minutes
     if(minutesDegrees == '90') {
         minsHand.style.transitionProperty = 'none';
-    }
+    } else (minsHand.style.transitionProperty = 'all');
+    // for hours
     if(hoursDegrees == '90') {
         hrsHand.style.transitionProperty = 'none';
-    }
-
+    } else (hrsHand.style.transitionProperty = 'all');
 }
 
 setInterval(setDate, 1000);
 
 setDate();
+
